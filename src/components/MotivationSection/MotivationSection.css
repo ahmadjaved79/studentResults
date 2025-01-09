@@ -1,0 +1,105 @@
+/* General Styling for the Section */
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 20px;
+  background-color: #f8f9fa;
+}
+
+/* Content Section */
+.section-content {
+  flex: 1;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  order: 2;
+}
+
+.section-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #007bff;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.section-content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  animation: slideUp 1.2s ease-in-out;
+}
+
+/* Image Section */
+.section-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  order: 1;
+  align-items: center;
+  animation: zoomIn 1.2s ease-in-out;
+}
+
+.section-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effects */
+.section-image img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section-image {
+    order: 1;
+  }
+
+  .section-content {
+    order: 2;
+  }
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+

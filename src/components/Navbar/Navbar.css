@@ -1,0 +1,99 @@
+/* General Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #f0f4f6;
+    color: #1a3329;
+    font-family: 'Arial, sans-serif';
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  /* Logo Section */
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-logo img {
+    height: 60px;
+    width: 60px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    animation: glow 2s infinite;
+  }
+  
+  .navbar-logo h1 {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  /* Glow Animation for Logo */
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px #fff;
+    }
+    50% {
+      box-shadow: 0 0 20px #00f;
+    }
+    100% {
+      box-shadow: 0 0 5px #fff;
+    }
+  }
+  
+  /* Navbar Links */
+  .navbar-links {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    transition: max-height 0.3s ease;
+  }
+  
+  .navbar-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .navbar-links a:hover {
+    color: #f5a623;
+  }
+  
+  /* Responsive Toggle Button */
+  .navbar-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  /* Media Queries for Small Devices */
+  @media (max-width: 768px) {
+    .navbar-links {
+      flex-direction: column;
+      align-items: center;
+      max-height: 0;
+      overflow: hidden;
+      background: #003580;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+    }
+  
+    .navbar-links.show {
+      max-height: 200px;
+    }
+  
+    .navbar-toggle {
+      display: block;
+    }
+  }
+  
