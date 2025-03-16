@@ -20,3 +20,36 @@ body {
     font-size: 14px;
   }
 }
+
+.spinner-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 8px solid #f3f3f3; /* Light gray */
+  border-top: 8px solid #007BFF; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.responseMessage {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: red; /* Use green or any color for success if needed */
+  text-align: center; /* Center-aligns the message */
+}

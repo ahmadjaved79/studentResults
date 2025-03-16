@@ -53,8 +53,6 @@ function TableComponent({ data }) {
         {selectedSemester !== null && (
           <div className="semester-details">
             <h4>Semester {data.semesters[selectedSemester].semester}</h4>
-            <p>SGPA: {data.semesters[selectedSemester].sgpa}</p>
-            <p>CGPA: {data.semesters[selectedSemester].cgpa}</p>
             <p>Current Backlogs: {data.semesters[selectedSemester].backlogs}</p>
             <p>Status: {data.semesters[selectedSemester].status}</p>
 
@@ -80,6 +78,8 @@ function TableComponent({ data }) {
                 ))}
               </tbody>
             </table>
+            <p>SGPA: {data.semesters[selectedSemester].sgpa}</p>
+            <p>CGPA: {data.semesters[selectedSemester].cgpa}</p>
           </div>
         )}
       </div>
