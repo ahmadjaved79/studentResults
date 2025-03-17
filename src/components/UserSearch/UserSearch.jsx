@@ -27,6 +27,7 @@ function UserSearch({ fetchUserData }) {
             onChange={(e) => setUserId(e.target.value)}
             className="search-input"
           />
+          <p className="hint">Example:24HP5A0503</p>
           <button className="search-button" onClick={handleSearch}>
             Get Marks
           </button>

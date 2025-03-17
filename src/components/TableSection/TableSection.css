@@ -1,45 +1,96 @@
-.greetings-container{
-   width: 100vw;
-   background-color: rgb(216, 227, 236);
-   border: 1px solid transparent;
-   border-radius: 15PX;
-   display: flex;
-   justify-content: center;
-   flex-direction: column;
-   align-items: center;
-   
+/* General Container */
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-.table-container {
-    margin: 20px auto;
-    text-align: center;
+/* Greeting Section */
+.greetings-container {
+  width: 100%;
+  background-color: rgb(216, 227, 236);
+  border-radius: 15px;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* Student Info */
+.info-container {
+  text-align: center;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Dropdown */
+.dropdown-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.semester-dropdown {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+/* Table */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
   }
-  
-  table {
-    border-collapse: collapse;
-    margin: 0 auto;
+
+  th, td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .semester-dropdown {
     width: 80%;
   }
-  
-  th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ccc;
-  }
-  
-  th {
-    background-color: var(--primary-color);
-    color: white;
-  }
-  
-  @media (max-width: 768px) {
-    table {
-      width: 100%;
-    }
-  
-    th, td {
-      font-size: 12px;
-      padding: 8px;
-    }
-  }
-  
+}
+
+.download-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.download-btn:hover {
+  background-color: #0056b3;
+}

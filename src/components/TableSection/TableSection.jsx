@@ -1,51 +1,49 @@
-
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import "./TableSection.css";
 
 function TableComponent({ data }) {
-  const [selectedSemester, setSelectedSemester] = useState(null); // Track the selected semester
-
-  const getGreetingMessage = () => {
-    const currentHour = new Date().getHours();
-    if (currentHour < 12) {
-      return "Good Morning!";
-    } else if (currentHour < 18) {
-      return "Good Afternoon!";
-    } else {
-      return "Good Evening!";
-    }
-  };
+  const [selectedSemester, setSelectedSemester] = useState(null);
+  const memoRef = useRef(null);
 
   const handleSemesterChange = (event) => {
     const semesterIndex = event.target.value === "none" ? null : parseInt(event.target.value);
     setSelectedSemester(semesterIndex);
   };
 
-  return (
-    <div>
-      <div className="greetings-container">
-        <h1 className="greeting-message">
-          Hello {data.studentName}, {getGreetingMessage()}
-        </h1>
-      </div>
+  const downloadPDF = () => {
+    const input = memoRef.current;
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 190;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+      pdf.save(`Marks_Memo_${data.studentName}.pdf`);
+    });
+  };
 
-      <div className="table-container">
-        <h3>Student Information</h3>
-        <p>Enrollment Number: {data.enrollmentNumber}</p>
-        <p>Total Backlogs: {data.totalBacklogs}</p>
+  return (
+    <div className="container">
+      {/* Memo Section */}
+      <div ref={memoRef}>
+        <div className="greetings-container">
+          <h1>Hello {data.studentName}, Good Day!</h1>
+        </div>
+
+        <div className="info-container">
+          <h3>Student Information</h3>
+          <p><strong>Enrollment Number:</strong> {data.enrollmentNumber}</p>
+          <p><strong>Total Backlogs:</strong> {data.totalBacklogs}</p>
+        </div>
 
         <div className="dropdown-container">
           <label htmlFor="semester-select">Select Semester:</label>
-          <select
-            id="semester-select"
-            onChange={handleSemesterChange}
-            className="semester-dropdown"
-          >
+          <select id="semester-select" onChange={handleSemesterChange} className="semester-dropdown">
             <option value="none">--Select Semester--</option>
             {data.semesters.map((semester, index) => (
-              <option key={index} value={index}>
-                Semester {semester.semester}
-              </option>
+              <option key={index} value={index}>Semester {semester.semester}</option>
             ))}
           </select>
         </div>
@@ -53,36 +51,42 @@ function TableComponent({ data }) {
         {selectedSemester !== null && (
           <div className="semester-details">
             <h4>Semester {data.semesters[selectedSemester].semester}</h4>
-            <p>Current Backlogs: {data.semesters[selectedSemester].backlogs}</p>
-            <p>Status: {data.semesters[selectedSemester].status}</p>
+            <p><strong>Current Backlogs:</strong> {data.semesters[selectedSemester].backlogs}</p>
+            <p><strong>Status:</strong> {data.semesters[selectedSemester].status}</p>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>Subject Code</th>
-                  <th>Subject Name</th>
-                  <th>Internal</th>
-                  <th>Credits</th>
-                  <th>Grade</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.semesters[selectedSemester].subjects.map((subject, idx) => (
-                  <tr key={idx}>
-                    <td>{subject.subjectCode}</td>
-                    <td>{subject.name}</td>
-                    <td>{subject.internal}</td>
-                    <td>{subject.credits}</td>
-                    <td>{subject.grade}</td>
+            <div className="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Subject Code</th>
+                    <th>Subject Name</th>
+                    <th>Internal</th>
+                    <th>Credits</th>
+                    <th>Grade</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <p>SGPA: {data.semesters[selectedSemester].sgpa}</p>
-            <p>CGPA: {data.semesters[selectedSemester].cgpa}</p>
+                </thead>
+                <tbody>
+                  {data.semesters[selectedSemester].subjects.map((subject, idx) => (
+                    <tr key={idx}>
+                      <td>{subject.subjectCode}</td>
+                      <td>{subject.name}</td>
+                      <td>{subject.internal}</td>
+                      <td>{subject.credits}</td>
+                      <td>{subject.grade}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p><strong>SGPA:</strong> {data.semesters[selectedSemester].sgpa}</p>
+            <p><strong>CGPA:</strong> {data.semesters[selectedSemester].cgpa}</p>
           </div>
         )}
       </div>
+
+      {/* Download Button */}
+      <button className="download-btn" onClick={downloadPDF}>Download Memo</button>
     </div>
   );
 }
